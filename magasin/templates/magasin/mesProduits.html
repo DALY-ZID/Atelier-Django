@@ -1,0 +1,44 @@
+{% extends 'magasin/base.html' %}
+{% block title %} Catalogue de produits {% endblock %}
+{% block content %}
+<!-- body -->
+<div class="container mt-3">
+    
+    <div class="row justify-content-center">
+        <!-- all products -->
+        <h1>Catalogue de produits</h1>
+
+        <div id='products' class="col-lg-9">
+            <div class="row">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {% for product in products %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner" >
+                        {% for product in products %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ product.Img.url }}" class="d-block w-100" alt="{{ product.libelle }}" >
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5 style="color: indianred">{{ product.libelle }}</h5>
+                                    <p style="color: indigo;">{{ product.description }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <br><br><br><br>
+
+{% endblock %}

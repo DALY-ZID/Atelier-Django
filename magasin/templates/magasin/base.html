@@ -1,0 +1,112 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <title>Catalogue de produits</title>
+    <style>
+        .navbar-brand img {
+            max-width: 40px;
+            height: auto;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{% static 'img/téléchargement.png' %}" alt="Logo">
+            E-Commerce
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Catalogue</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProducts" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Produits
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+                        <li><a class="dropdown-item" href="{% url 'product_list' %}">Liste des produits</a></li>
+                        <li><a class="dropdown-item" href="{% url 'addPrd' %}">Ajouter un produit</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSuppliers" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Fournisseurs
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownSuppliers">
+                        <li><a class="dropdown-item" href="{% url 'frs_list' %}">Liste des fournisseurs</a></li>
+                        <li><a class="dropdown-item" href="{% url 'addFrs' %}">Ajouter un fournisseur</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCommands" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Commandes
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownCommands">
+                        <li><a class="dropdown-item" href="{% url 'commande_list' %}">Liste des commandes</a></li>
+                        <li><a class="dropdown-item" href="{% url 'addCmd' %}">Ajouter une commande</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ user }},</a>
+                </li>
+                <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link nav-link">Déconnexion</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Connexion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Inscription</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block content %} {% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+<script>
+    // Pour activer le dropdown Bootstrap
+    var dropdownMenuLink = document.querySelectorAll('.dropdown-toggle');
+    dropdownMenuLink.forEach(function (dropdownToggle) {
+        dropdownToggle.addEventListener('click', function () {
+            var dropdownMenu = this.nextElementSibling;
+            dropdownMenu.classList.toggle('show');
+        });
+    });
+
+    window.addEventListener('mouseup', function (event) {
+        var dropdowns = document.querySelectorAll('.dropdown-menu');
+        dropdowns.forEach(function (dropdown) {
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+    });
+</script>
+</body>
+</html>

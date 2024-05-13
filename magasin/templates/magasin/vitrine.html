@@ -1,0 +1,62 @@
+{% extends 'magasin/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .card {
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+    }
+  
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+  
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  
+    .card-text {
+      font-size: 16px;
+    }
+  
+    .card-footer {
+      background-color: #f7f7f7;
+      border-top: 1px solid #dee2e6;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  
+    .card-footer small {
+      color: #6c757d;
+    }
+</style>
+<br><br>
+<div class="container">
+  <div style="overflow:scroll; border:#000000 1px solid;">
+    <table>
+      <tr>
+        {% for article in products %}
+        <td>
+        <div class="card">
+            <img src="../media/{{ article.Img }}" class="card-img-top" alt="{{ article.libelle }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ article.libelle }}</h5>
+                <p class="card-text">{{ article.prix }} DT</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Description : {{ article.description }}</small>
+            </div>
+        </div>
+        </td>
+        {% endfor %}
+    </tr>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

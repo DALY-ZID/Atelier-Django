@@ -1,0 +1,26 @@
+{% extends 'magasin/base.html' %}
+{% block title %} Catalogue de produits {% endblock %}
+{% block content %}
+<!-- body -->
+<div>
+    <h1 style="margin-left: 400px;">Catalogue des commandes</h1>
+    <table class="table table-striped">
+        <tr class="table-info">
+            <td class="table-info">Date du commande</td>
+            <td class="table-info">Total du commande</td>
+            <td class="table-info">Produit</td>
+
+        </tr>
+        {% for cmd in commandes %}
+        {{ cmd.priceProducts }}
+        <tr class="table-primary">
+            <td class="table-primary">{{cmd.dateCde}}</td>
+            <td class="table-primary">{{cmd.totalCde}}</td>
+            <td class="table-primary">{{ cmd.allProducts }} </td>       
+        </tr>
+        {% endfor %}
+    
+    </table>
+    
+</div>
+{% endblock %}

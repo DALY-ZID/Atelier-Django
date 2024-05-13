@@ -1,0 +1,48 @@
+{% extends 'magasin/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Manip Produit</h2>
+                </div>
+                <div class="card-body">
+                    <form method='POST' class="post-form" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form.libelle.label_tag }}
+                            {{ form.libelle }}
+                        </div><br>
+                        <div class="form-group">
+                            {{ form.description.label_tag }}
+                            {{ form.description }}
+                        </div><br>
+                        <div class="form-group">
+                            {{ form.prix.label_tag }}
+                            {{ form.prix }}
+                        </div><br>
+                        <div class="form-group">
+                            {{ form.type.label_tag }}
+                            {{ form.type }}
+                        </div><br>
+                        <div class="form-group">
+                            {{ form.Img.label_tag }}
+                            {{ form.Img }}
+                        </div><br>
+                        <div class="form-group">
+                            {{ form.categorie.label_tag }}
+                            {{ form.categorie }}
+                        </div><br>
+                        <div class="form-group">
+                            {{ form.fournisseur.label_tag }}
+                            {{ form.fournisseur }}
+                        </div><br>
+                        <button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
